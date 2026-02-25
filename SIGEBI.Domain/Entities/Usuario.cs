@@ -1,0 +1,29 @@
+using SIGEBI.Domain.Base;
+
+namespace SIGEBI.Domain.Entities
+{
+    public class Usuario : AuditableEntity<int>
+    {
+        public string Nombre { get; set; } = string.Empty;
+        public string Apellido { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public string PasswordHash { get; set; } = string.Empty;
+
+        public int RolId { get; set; }
+        public Rol? Rol { get; set; }
+
+        public DateTime FechaRegistro { get; set; }
+        public bool Activo { get; set; } = true;
+        public DateTime? BloqueadoHasta { get; set; }
+
+        public bool PuedeSolicitarPrestamo()
+        {
+            return Activo && (BloqueadoHasta == null || BloqueadoHasta < DateTime.Now);
+        }
+
+        public bool TienePenalizacionActiva()
+        {
+            return BloqueadoHasta != null && BloqueadoHasta > DateTime.Now;
+        }
+    }
+}
