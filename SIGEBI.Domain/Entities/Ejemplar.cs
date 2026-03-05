@@ -14,9 +14,5 @@ namespace SIGEBI.Domain.Entities
         public DateTime FechaAdquisicion { get; set; }
         public bool Activo { get; set; } = true;
 
-        public bool EstaDisponible()
-        {
-            return Estado == EstadoEjemplar.Disponible;
-        }
     }
 }

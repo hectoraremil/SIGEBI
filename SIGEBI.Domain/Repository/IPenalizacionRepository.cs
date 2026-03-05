@@ -1,9 +1,10 @@
+using SIGEBI.Domain.Abstractions.Base;
 using SIGEBI.Domain.Entities;
 
 namespace SIGEBI.Domain.Repository
 {
-    public interface IPenalizacionRepository : IBaseRepository<Penalizacion>
+    public interface IPenalizacionRepository : IRepository<Penalizacion, int>
     {
-        Task<IEnumerable<Penalizacion>> GetActivasByUsuarioIdAsync(int usuarioId);
+        Task<IReadOnlyList<Penalizacion>> GetActivasByUsuarioIdAsync(int usuarioId, CancellationToken ct = default);
     }
 }

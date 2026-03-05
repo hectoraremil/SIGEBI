@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SIGEBI.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+de66a72f4881aa31e3f8a0109e39592b65209529")]
 [assembly: System.Reflection.AssemblyProductAttribute("SIGEBI.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SIGEBI.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

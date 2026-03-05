@@ -16,14 +16,5 @@ namespace SIGEBI.Domain.Entities
         public bool Activo { get; set; } = true;
         public DateTime? BloqueadoHasta { get; set; }
 
-        public bool PuedeSolicitarPrestamo()
-        {
-            return Activo && (BloqueadoHasta == null || BloqueadoHasta < DateTime.Now);
-        }
-
-        public bool TienePenalizacionActiva()
-        {
-            return BloqueadoHasta != null && BloqueadoHasta > DateTime.Now;
-        }
     }
 }

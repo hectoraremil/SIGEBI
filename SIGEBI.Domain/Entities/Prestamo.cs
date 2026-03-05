@@ -19,14 +19,5 @@ namespace SIGEBI.Domain.Entities
         public int? CreadoPorUsuarioId { get; set; }
         public bool Activo { get; set; } = true;
 
-        public bool EstaVencido(DateTime fechaActual)
-        {
-            return Estado == EstadoPrestamo.Activo && fechaActual > FechaVencimiento;
-        }
-
-        public void MarcarDevuelto()
-        {
-            Estado = EstadoPrestamo.Devuelto;
-        }
     }
 }

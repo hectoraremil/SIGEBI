@@ -1,10 +1,12 @@
+using SIGEBI.Domain.Abstractions.Base;
 using SIGEBI.Domain.Entities;
 
 namespace SIGEBI.Domain.Repository
 {
-    public interface IRecursoBibliograficoRepository : IBaseRepository<RecursoBibliografico>
+    public interface IRecursoBibliograficoRepository : IRepository<RecursoBibliografico, int>
     {
-        Task<IEnumerable<RecursoBibliografico>> GetByTituloAsync(string titulo);
-        Task<IEnumerable<RecursoBibliografico>> GetByCategoriaAsync(string categoria);
+        Task<IReadOnlyList<RecursoBibliografico>> GetAllActiveAsync(CancellationToken ct = default);
+        Task<IReadOnlyList<RecursoBibliografico>> GetByTituloAsync(string titulo, CancellationToken ct = default);
+        Task<IReadOnlyList<RecursoBibliografico>> GetByCategoriaAsync(string categoria, CancellationToken ct = default);
     }
 }

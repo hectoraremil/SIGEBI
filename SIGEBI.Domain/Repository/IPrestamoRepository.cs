@@ -1,10 +1,11 @@
+using SIGEBI.Domain.Abstractions.Base;
 using SIGEBI.Domain.Entities;
 
 namespace SIGEBI.Domain.Repository
 {
-    public interface IPrestamoRepository : IBaseRepository<Prestamo>
+    public interface IPrestamoRepository : IRepository<Prestamo, int>
     {
-        Task<IEnumerable<Prestamo>> GetActivosByUsuarioIdAsync(int usuarioId);
-        Task<IEnumerable<Prestamo>> GetVencidosAsync();
+        Task<IReadOnlyList<Prestamo>> GetActivosByUsuarioIdAsync(int usuarioId, CancellationToken ct = default);
+        Task<IReadOnlyList<Prestamo>> GetVencidosAsync(CancellationToken ct = default);
     }
 }

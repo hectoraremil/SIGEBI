@@ -1,9 +1,11 @@
+using SIGEBI.Domain.Abstractions.Base;
 using SIGEBI.Domain.Entities;
 
 namespace SIGEBI.Domain.Repository
 {
-    public interface IUsuarioRepository : IBaseRepository<Usuario>
+    public interface IUsuarioRepository : IRepository<Usuario, int>
     {
-        Task<Usuario?> GetByEmailAsync(string email);
+        Task<IReadOnlyList<Usuario>> GetAllActiveAsync(CancellationToken ct = default);
+        Task<Usuario?> GetByEmailAsync(string email, CancellationToken ct = default);
     }
 }

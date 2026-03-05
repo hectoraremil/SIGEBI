@@ -1,10 +1,11 @@
+using SIGEBI.Domain.Abstractions.Base;
 using SIGEBI.Domain.Entities;
 
 namespace SIGEBI.Domain.Repository
 {
-    public interface IEjemplarRepository : IBaseRepository<Ejemplar>
+    public interface IEjemplarRepository : IRepository<Ejemplar, int>
     {
-        Task<IEnumerable<Ejemplar>> GetByRecursoIdAsync(int recursoId);
-        Task<IEnumerable<Ejemplar>> GetDisponiblesByRecursoIdAsync(int recursoId);
+        Task<IReadOnlyList<Ejemplar>> GetByRecursoIdAsync(int recursoId, CancellationToken ct = default);
+        Task<IReadOnlyList<Ejemplar>> GetDisponiblesByRecursoIdAsync(int recursoId, CancellationToken ct = default);
     }
 }

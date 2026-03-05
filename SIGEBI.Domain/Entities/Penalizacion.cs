@@ -18,9 +18,5 @@ namespace SIGEBI.Domain.Entities
         public EstadoPenalizacion Estado { get; set; }
         public bool Activo { get; set; } = true;
 
-        public bool EstaActiva(DateTime fechaActual)
-        {
-            return Estado == EstadoPenalizacion.Activa && fechaActual <= FechaFin;
-        }
     }
 }
