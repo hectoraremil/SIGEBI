@@ -5,6 +5,7 @@ namespace SIGEBI.Domain.Repository
 {
     public interface INotificacionRepository : IRepository<Notificacion, int>
     {
+        Task<IReadOnlyList<Notificacion>> GetAllAsync(CancellationToken ct = default);
         Task<IReadOnlyList<Notificacion>> GetByUsuarioIdAsync(int usuarioId, CancellationToken ct = default);
     }
 }

@@ -66,6 +66,13 @@ namespace SIGEBI.Persistence.Repositories
 
         #region IEjemplarRepository
 
+        public async Task<IReadOnlyList<Ejemplar>> GetAllAsync(CancellationToken ct = default)
+        {
+            return await _context.Ejemplares
+                .Where(e => !e.Deleted)
+                .ToListAsync(ct);
+        }
+
         public async Task<IReadOnlyList<Ejemplar>> GetByRecursoIdAsync(int recursoId, CancellationToken ct = default)
         {
             return await _context.Ejemplares

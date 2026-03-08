@@ -4,6 +4,7 @@ namespace SIGEBI.Domain.Models
 {
     public class PrestamoModel
     {
+        public int Id { get; set; }
         public int PrestamoId { get; set; }
         public int UsuarioId { get; set; }
         public string NombreUsuario { get; set; } = string.Empty;
@@ -13,5 +14,8 @@ namespace SIGEBI.Domain.Models
         public DateTime FechaPrestamo { get; set; }
         public DateTime FechaVencimiento { get; set; }
         public EstadoPrestamo Estado { get; set; }
+        public int? RenovacionesRealizadas { get; set; }
+        public int? CreadoPorUsuarioId { get; set; }
+        public bool Activo { get; set; }
     }
 }

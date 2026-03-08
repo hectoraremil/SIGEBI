@@ -62,6 +62,13 @@ namespace SIGEBI.Persistence.Repositories
 
         #region IDevolucionRepository
 
+        public async Task<IReadOnlyList<Devolucion>> GetAllAsync(CancellationToken ct = default)
+        {
+            return await _context.Devoluciones
+                .Where(d => !d.Deleted)
+                .ToListAsync(ct);
+        }
+
         public async Task<Devolucion?> GetByPrestamoIdAsync(int prestamoId, CancellationToken ct = default)
         {
             return await _context.Devoluciones

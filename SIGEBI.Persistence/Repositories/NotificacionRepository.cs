@@ -63,6 +63,13 @@ namespace SIGEBI.Persistence.Repositories
 
         #region INotificacionRepository
 
+        public async Task<IReadOnlyList<Notificacion>> GetAllAsync(CancellationToken ct = default)
+        {
+            return await _context.Notificaciones
+                .Where(n => !n.Deleted)
+                .ToListAsync(ct);
+        }
+
         public async Task<IReadOnlyList<Notificacion>> GetByUsuarioIdAsync(int usuarioId, CancellationToken ct = default)
         {
             return await _context.Notificaciones

@@ -65,6 +65,13 @@ namespace SIGEBI.Persistence.Repositories
 
         #region IPrestamoRepository
 
+        public async Task<IReadOnlyList<Prestamo>> GetAllAsync(CancellationToken ct = default)
+        {
+            return await _context.Prestamos
+                .Where(p => !p.Deleted)
+                .ToListAsync(ct);
+        }
+
         public async Task<IReadOnlyList<Prestamo>> GetActivosByUsuarioIdAsync(int usuarioId, CancellationToken ct = default)
         {
             return await _context.Prestamos

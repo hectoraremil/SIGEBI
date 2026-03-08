@@ -66,6 +66,13 @@ namespace SIGEBI.Persistence.Repositories
 
         #region IUsuarioRepository
 
+        public async Task<IReadOnlyList<Usuario>> GetAllAsync(CancellationToken ct = default)
+        {
+            return await _context.Usuarios
+                .Where(u => !u.Deleted)
+                .ToListAsync(ct);
+        }
+
         public async Task<IReadOnlyList<Usuario>> GetAllActiveAsync(CancellationToken ct = default)
         {
             return await _context.Usuarios

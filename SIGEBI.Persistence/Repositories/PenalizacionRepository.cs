@@ -65,6 +65,13 @@ namespace SIGEBI.Persistence.Repositories
 
         #region IPenalizacionRepository
 
+        public async Task<IReadOnlyList<Penalizacion>> GetAllAsync(CancellationToken ct = default)
+        {
+            return await _context.Penalizaciones
+                .Where(p => !p.Deleted)
+                .ToListAsync(ct);
+        }
+
         public async Task<IReadOnlyList<Penalizacion>> GetActivasByUsuarioIdAsync(int usuarioId, CancellationToken ct = default)
         {
             return await _context.Penalizaciones

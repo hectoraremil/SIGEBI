@@ -68,6 +68,13 @@ namespace SIGEBI.Persistence.Repositories
 
         #region IRecursoBibliograficoRepository
 
+        public async Task<IReadOnlyList<RecursoBibliografico>> GetAllAsync(CancellationToken ct = default)
+        {
+            return await _context.RecursosBibliograficos
+                .Where(r => !r.Deleted)
+                .ToListAsync(ct);
+        }
+
         public async Task<IReadOnlyList<RecursoBibliografico>> GetAllActiveAsync(CancellationToken ct = default)
         {
             return await _context.RecursosBibliograficos
