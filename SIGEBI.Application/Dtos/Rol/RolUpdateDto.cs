@@ -1,8 +1,7 @@
-namespace SIGEBI.Domain.Models
+namespace SIGEBI.Application.Dtos.Rol
 {
-    public class RolModel
+    public class RolUpdateDto
     {
-        public int Id { get; set; }
         public string Nombre { get; set; } = string.Empty;
         public string Descripcion { get; set; } = string.Empty;
         public int MaxPrestamos { get; set; }

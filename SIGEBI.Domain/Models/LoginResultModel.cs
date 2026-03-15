@@ -10,5 +10,7 @@ namespace SIGEBI.Domain.Models
         public string NombreRol { get; set; } = string.Empty;
         public bool Activo { get; set; }
         public DateTime? BloqueadoHasta { get; set; }
+        public string Token { get; set; } = string.Empty;
+        public DateTime? ExpiraEn { get; set; }
     }
 }

@@ -7,7 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.8" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SIGEBI.Application\SIGEBI.Application.csproj" />
+    <ProjectReference Include="..\SIGEBI.Infrastructure\SIGEBI.Infrastructure.csproj" />
+    <ProjectReference Include="..\SIGEBI.Persistence\SIGEBI.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

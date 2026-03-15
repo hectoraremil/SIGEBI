@@ -8,6 +8,7 @@ namespace SIGEBI.Application.Interfaces
     {
         Task<ServiceResult<List<DevolucionModel>>> GetAllDevolucionesAsync();
         Task<ServiceResult<DevolucionModel>> GetDevolucionByIdAsync(int id);
+        Task<ServiceResult<DevolucionModel>> GetDevolucionByPrestamoIdAsync(int prestamoId);
         Task<ServiceResult<bool>> CreateDevolucionAsync(DevolucionAddDto devolucionDto);
     }
 }

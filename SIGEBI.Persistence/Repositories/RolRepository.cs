@@ -37,6 +37,11 @@ namespace SIGEBI.Persistence.Repositories
                 throw new PersistenceException("El rol que desea actualizar no existe.");
 
             rol.Nombre = entity.Nombre;
+            rol.Descripcion = entity.Descripcion;
+            rol.MaxPrestamos = entity.MaxPrestamos;
+            rol.DiasPrestamoDefault = entity.DiasPrestamoDefault;
+            rol.PuedeRenovar = entity.PuedeRenovar;
+            rol.MaxRenovaciones = entity.MaxRenovaciones;
             rol.ModifyDate = entity.ModifyDate;
             rol.UserMod = entity.UserMod;
 

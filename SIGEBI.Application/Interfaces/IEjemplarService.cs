@@ -8,6 +8,8 @@ namespace SIGEBI.Application.Interfaces
     {
         Task<ServiceResult<List<EjemplarModel>>> GetAllEjemplaresAsync();
         Task<ServiceResult<EjemplarModel>> GetEjemplarByIdAsync(int id);
+        Task<ServiceResult<List<EjemplarModel>>> GetEjemplaresPorRecursoAsync(int recursoId);
+        Task<ServiceResult<List<EjemplarModel>>> GetEjemplaresDisponiblesPorRecursoAsync(int recursoId);
         Task<ServiceResult<bool>> CreateEjemplarAsync(EjemplarAddDto ejemplarDto);
         Task<ServiceResult<bool>> UpdateEjemplarAsync(int id, EjemplarUpdateDto ejemplarDto);
         Task<ServiceResult<bool>> DeleteEjemplarAsync(int id);

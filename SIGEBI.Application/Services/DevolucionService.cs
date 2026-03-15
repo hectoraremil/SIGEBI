@@ -101,6 +101,48 @@ namespace SIGEBI.Application.Services
             return serviceResult;
         }
 
+        public async Task<ServiceResult<DevolucionModel>> GetDevolucionByPrestamoIdAsync(int prestamoId)
+        {
+            ServiceResult<DevolucionModel> serviceResult = new ServiceResult<DevolucionModel>();
+
+            try
+            {
+                _logger.LogInformation("Starting get devolucion by prestamo id process. PrestamoId: {PrestamoId}", prestamoId);
+
+                var devolucion = await _devolucionRepository.GetByPrestamoIdAsync(prestamoId);
+
+                if (devolucion == null)
+                {
+                    serviceResult.Success = false;
+                    serviceResult.Message = "Devolucion not found.";
+                    return serviceResult;
+                }
+
+                DevolucionModel devolucionModel = new DevolucionModel
+                {
+                    Id = devolucion.Id,
+                    PrestamoId = devolucion.PrestamoId,
+                    FechaDevolucion = devolucion.FechaDevolucion,
+                    DiasAtraso = devolucion.DiasAtraso,
+                    RegistradoPorUsuarioId = devolucion.RegistradoPorUsuarioId,
+                    Observaciones = devolucion.Observaciones,
+                    Activo = devolucion.Activo
+                };
+
+                serviceResult.Success = true;
+                serviceResult.Message = "Devolucion retrieved successfully.";
+                serviceResult.Data = devolucionModel;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while getting devolucion by prestamo id.");
+                serviceResult.Success = false;
+                serviceResult.Message = "An error occurred while getting devolucion.";
+            }
+
+            return serviceResult;
+        }
+
         public async Task<ServiceResult<bool>> CreateDevolucionAsync(DevolucionAddDto devolucionDto)
         {
             ServiceResult<bool> serviceResult = new ServiceResult<bool>();

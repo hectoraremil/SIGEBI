@@ -12,14 +12,17 @@ namespace SIGEBI.Application.Services
     public sealed class UsuarioService : IUsuarioService
     {
         private readonly IUsuarioRepository _usuarioRepository;
+        private readonly IRolRepository _rolRepository;
         private readonly IUsuarioValidator _usuarioValidator;
         private readonly ILogger<UsuarioService> _logger;
 
         public UsuarioService(IUsuarioRepository usuarioRepository,
+                             IRolRepository rolRepository,
                              IUsuarioValidator usuarioValidator,
                              ILogger<UsuarioService> logger)
         {
             _usuarioRepository = usuarioRepository;
+            _rolRepository = rolRepository;
             _usuarioValidator = usuarioValidator;
             _logger = logger;
         }
@@ -298,10 +301,18 @@ namespace SIGEBI.Application.Services
                     Apellido = usuario.Apellido,
                     Email = usuario.Email,
                     RolId = usuario.RolId,
+                    NombreRol = string.Empty,
                     Activo = usuario.Activo,
                     BloqueadoHasta = usuario.BloqueadoHasta
                 };
-                
+
+                var rol = await _rolRepository.GetByIdAsync(usuario.RolId);
+
+                if (rol != null)
+                {
+                    loginResult.NombreRol = rol.Nombre;
+                }
+                 
                 _logger.LogInformation("Login successful for email: {Email}", loginDto.Email);
                 serviceResult.Success = true;
                 serviceResult.Message = "Login successful.";

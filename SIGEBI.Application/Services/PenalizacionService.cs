@@ -160,6 +160,44 @@ namespace SIGEBI.Application.Services
             return serviceResult;
         }
 
+        public async Task<ServiceResult<bool>> LevantarPenalizacionAsync(int id)
+        {
+            ServiceResult<bool> serviceResult = new ServiceResult<bool>();
+
+            _logger.LogInformation("Starting penalizacion lift process. Id: {Id}", id);
+
+            try
+            {
+                var penalizacion = await _penalizacionRepository.GetByIdAsync(id);
+
+                if (penalizacion == null)
+                {
+                    serviceResult.Success = false;
+                    serviceResult.Message = "Penalizacion not found.";
+                    serviceResult.Data = false;
+                    return serviceResult;
+                }
+
+                penalizacion.Estado = Domain.Enums.EstadoPenalizacion.Cumplida;
+                penalizacion.FechaFin = DateTime.Now;
+
+                await _penalizacionRepository.UpdateAsync(penalizacion);
+
+                serviceResult.Success = true;
+                serviceResult.Message = "Penalizacion lifted successfully.";
+                serviceResult.Data = true;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while lifting a penalizacion.");
+                serviceResult.Success = false;
+                serviceResult.Message = "An error occurred while lifting a penalizacion.";
+                serviceResult.Data = false;
+            }
+
+            return serviceResult;
+        }
+
         public async Task<ServiceResult<List<PenalizacionModel>>> GetPenalizacionesPorUsuarioAsync(int usuarioId)
         {
             ServiceResult<List<PenalizacionModel>> serviceResult = new ServiceResult<List<PenalizacionModel>>();

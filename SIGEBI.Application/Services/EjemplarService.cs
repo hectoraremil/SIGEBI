@@ -101,6 +101,76 @@ namespace SIGEBI.Application.Services
             return serviceResult;
         }
 
+        public async Task<ServiceResult<List<EjemplarModel>>> GetEjemplaresPorRecursoAsync(int recursoId)
+        {
+            ServiceResult<List<EjemplarModel>> serviceResult = new ServiceResult<List<EjemplarModel>>();
+
+            try
+            {
+                _logger.LogInformation("Starting get ejemplares by recurso process. RecursoId: {RecursoId}", recursoId);
+
+                var ejemplares = await _ejemplarRepository.GetByRecursoIdAsync(recursoId);
+
+                var ejemplaresModel = ejemplares.Select(e => new EjemplarModel
+                {
+                    Id = e.Id,
+                    RecursoBibliograficoId = e.RecursoBibliograficoId,
+                    CodigoInventario = e.CodigoInventario,
+                    Estado = e.Estado,
+                    Ubicacion = e.Ubicacion,
+                    FechaAdquisicion = e.FechaAdquisicion,
+                    Activo = e.Activo
+                }).ToList();
+
+                serviceResult.Success = true;
+                serviceResult.Message = "Ejemplares retrieved successfully.";
+                serviceResult.Data = ejemplaresModel;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while getting ejemplares by recurso.");
+                serviceResult.Success = false;
+                serviceResult.Message = "An error occurred while getting ejemplares.";
+            }
+
+            return serviceResult;
+        }
+
+        public async Task<ServiceResult<List<EjemplarModel>>> GetEjemplaresDisponiblesPorRecursoAsync(int recursoId)
+        {
+            ServiceResult<List<EjemplarModel>> serviceResult = new ServiceResult<List<EjemplarModel>>();
+
+            try
+            {
+                _logger.LogInformation("Starting get ejemplares disponibles by recurso process. RecursoId: {RecursoId}", recursoId);
+
+                var ejemplares = await _ejemplarRepository.GetDisponiblesByRecursoIdAsync(recursoId);
+
+                var ejemplaresModel = ejemplares.Select(e => new EjemplarModel
+                {
+                    Id = e.Id,
+                    RecursoBibliograficoId = e.RecursoBibliograficoId,
+                    CodigoInventario = e.CodigoInventario,
+                    Estado = e.Estado,
+                    Ubicacion = e.Ubicacion,
+                    FechaAdquisicion = e.FechaAdquisicion,
+                    Activo = e.Activo
+                }).ToList();
+
+                serviceResult.Success = true;
+                serviceResult.Message = "Ejemplares retrieved successfully.";
+                serviceResult.Data = ejemplaresModel;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while getting ejemplares disponibles by recurso.");
+                serviceResult.Success = false;
+                serviceResult.Message = "An error occurred while getting ejemplares.";
+            }
+
+            return serviceResult;
+        }
+
         public async Task<ServiceResult<bool>> CreateEjemplarAsync(EjemplarAddDto ejemplarDto)
         {
             ServiceResult<bool> serviceResult = new ServiceResult<bool>();
